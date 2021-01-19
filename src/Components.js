@@ -7,6 +7,14 @@ import 'react-tabs/style/react-tabs.css';
 import Grid from '@material-ui/core/Grid';
 
 export function Home() {
+    const [string, setString] = useState('');
+    const [count, setCount] = useState('')
+
+    useEffect (() => {
+        apiFacade.getActivityCount()
+        .then(data => setCount(data.count))
+}, [string])
+
     return (
         <div>
             <div>
@@ -21,7 +29,10 @@ export function Home() {
                     <li>Get specific details about the City your exercise took place.</li>
                     <li>See all the previous Activities</li>
                     <li>Login and Logout</li>
+                  
                 </ol>
+                <h5>Total number of exercise activities in our system:</h5>
+                <h6>{count}</h6>
             </div>
         </div>
     );

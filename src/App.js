@@ -29,6 +29,8 @@ import MyActivities from './Components/MyActivities';
 
 function App() {
 
+  const [count, setCount] = useState('')
+
   const [error, setError] = useState('')
   const [signUpMsg, setSignUpMsg] = useState("");
   const [isSignedUp, setIsSignedUp] = useState("");
@@ -40,7 +42,14 @@ function App() {
     setToken("")
   }
 
-  let decoded = jwt_decode(token);
+  let decoded;
+
+  // Upon reloading the page, isAdmin will return false by default, and result in admin page not showing.
+  // We want to "prevent" this if the token is active, and the .roles is admin.
+  if (token != null && token != "") {
+    decoded = jwt_decode(token);
+  }
+
 
   const login = (user, pass) => {
     setError("");
@@ -55,7 +64,6 @@ function App() {
       })
       .catch(err => {
         setError("Couldn't log you in, make sure the username and password are correct.");
-        console.log(err);
       })
   }
 
@@ -69,7 +77,6 @@ function App() {
       .catch(err => {
         setIsSignedUp(false);
         setSignUpMsg("Couldn't register, please try again later.");
-        console.log(err);
         Promise.resolve(err.fullError).then(function(value) {
           setSignUpMsg(value.message);
         })

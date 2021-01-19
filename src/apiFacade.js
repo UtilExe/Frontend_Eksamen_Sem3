@@ -1,4 +1,10 @@
-import URLS, {loginURL, signUpURL, AllActivitesURL, SubmitSpecificActivityURL, getUserWeatherURL, getUserCityURL} from './Settings';
+import URLS, {loginURL, signUpURL, AllActivitesURL, SubmitSpecificActivityURL, getUserWeatherURL, getUserCityURL, allActivityCountURL} from './Settings';
+
+function getActivityCount() {
+    const options = makeOptions("GET", true);
+    return fetch(allActivityCountURL, options)
+    .then(handleHttpErrors);
+}
 
 function submitActivity(activity) {
     const options = makeOptions("POST", true, activity);
@@ -62,7 +68,8 @@ const apiFacade = {
     getAllActivites,
     submitActivity,
     getUserWeather,
-    getUserCity
+    getUserCity,
+    getActivityCount
 }
 
 function makeOptions(method, addToken, body) {
