@@ -1,4 +1,4 @@
-const mainURL = "http://localhost:8080/backend_eksamen/api/";
+const mainURL = "https://work.emucoach.com/tomcat/BACKEND_EKS/api/";
 
 export const loginURL = mainURL + "login";
 export const signUpURL = mainURL + "register";
